@@ -86,6 +86,14 @@ Prefer a container? Follow the [Docker guide](docs/deployment/docker.md). Existi
 
 Start with one model, then add more once you know what to look for. Reading the cases is free; testing your own project incurs model and search API charges.
 
+### Talk to the video advisor
+
+The workbench shows a small advisor card by default. Click it to open the [official advisor entry point](https://niubigeo.ai/advisor), which redirects to the [NiubiStar-hosted video advisor](https://video.niubistar.com/niubigeo). You do not need to provide an API key to use the advisor.
+
+The local workbench loads no third-party script, iframe or video for this card, and the link does not include project data or model API keys. Choose which project details to share during your conversation on the external service.
+
+To hide the card, set `NIUBIGEO_VIDEO_ADVISOR_ENABLED=false` in `.env` and restart the server, or recreate the web container with `docker compose up -d`. `0` and `off` also hide it. Local diagnostics continue to work with the card disabled. This link adds no payment requirement and does not change the Apache-2.0 license.
+
 <a id="features"></a>
 
 ## From one answer to ongoing observation

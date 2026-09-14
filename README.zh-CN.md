@@ -86,6 +86,14 @@ npm run server
 
 第一次可以只选一个模型，了解结果后再增加。阅读案例免费；测试自己的项目会消耗所选模型及搜索服务的 API 额度。
 
+### 与数字人顾问交流
+
+工作台默认显示一张简洁的顾问卡片。点击后打开[官网顾问入口](https://niubigeo.ai/advisor)，再跳转至 [NiubiStar 托管的数字人顾问](https://video.niubistar.com/niubigeo)。使用顾问无需自行提供 API Key。
+
+本地工作台不会为此卡片加载第三方脚本、iframe 或视频，外链也不附带项目资料或模型 API Key。需要讨论的具体内容由你在外部服务的会话中自行提供。
+
+如需隐藏卡片，在 `.env` 中设置 `NIUBIGEO_VIDEO_ADVISOR_ENABLED=false` 后重启服务；Docker 用户执行 `docker compose up -d` 重新创建 Web 容器。`0` 和 `off` 也可关闭。关闭卡片不影响本地诊断，此入口不新增付费要求，也不改变 Apache-2.0 许可证。
+
 <a id="features"></a>
 
 ## 从一次回答，到持续观察

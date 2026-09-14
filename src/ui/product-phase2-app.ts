@@ -1,4 +1,5 @@
 import { PRODUCT_NAME, PRODUCT_TITLE, renderNiubigeoLockup, renderNiubigeoMarkSvg } from "./brand.js";
+import { renderVideoAdvisor } from "./video-advisor.js";
 
 export function renderProductPhase2AppHtml(): string {
   return `<!doctype html>
@@ -265,6 +266,7 @@ export function renderProductPhase2AppHtml(): string {
     document.addEventListener("change", (event) => { const target = event.target; if (target instanceof HTMLSelectElement && target.id === "project-select") { state.recognitionSelectedRunId = ""; window.setTimeout(() => { if (state.page === "recognition") refreshRecognition().catch(() => {}); }, 0); } });
     window.__niubigeoPhase2 = { state, app, html, element, project, formatTime, brandMark, brandLockup, request, refreshRecognition, phase2Render, render: () => render() };
   </script>
+${renderVideoAdvisor()}
 </body>
 </html>`;
 }
