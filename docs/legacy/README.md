@@ -1,18 +1,18 @@
 <div align="center">
 
-<img src="./assets/brand/niubigeo-readme-hero.svg" width="100%" alt="NiubiGEO - open-source AI brand visibility and competitor reports" />
+<img src="../../assets/brand/niubigeo-readme-hero.svg" width="100%" alt="NiubiGEO - open-source AI brand visibility and competitor reports" />
 
 ### Does AI recommend your product? Who shows up instead?
 
 **Enter a domain and see whether AI recommends you, which competitors appear, and which sources shape the answer.**
 
-[Next Preview](./NEXT_PREVIEW.md) · [简体中文](./README.zh-CN.md) · [Quick start](#3-minute-audit) · [Releases](https://github.com/Albert-Weasker/niubigeo/releases) · [Packages](https://github.com/Albert-Weasker/niubigeo/pkgs/container/niubigeo) · [Compare tools](#niubigeo-vs-commercial-ai-visibility-tools)
+[Next Preview](../../NEXT_PREVIEW.md) · [简体中文](./README.zh-CN.md) · [Quick start](#3-minute-audit) · [Releases](https://github.com/Albert-Weasker/niubigeo/releases) · [Packages](https://github.com/Albert-Weasker/niubigeo/pkgs/container/niubigeo) · [Compare tools](#niubigeo-vs-commercial-ai-visibility-tools)
 
 <p>
   <strong>NiubiGEO Next Preview is available:</strong><br />
-  <a href="./NEXT_PREVIEW.md"><strong>Read the redesigned AI domain-recognition monitor</strong></a>
+  <a href="../../NEXT_PREVIEW.md"><strong>Read the redesigned AI domain-recognition monitor</strong></a>
   ·
-  <a href="./NEXT_PREVIEW.zh-CN.md">查看简体中文预告</a>
+  <a href="../../NEXT_PREVIEW.zh-CN.md">查看简体中文预告</a>
 </p>
 
 <br />
@@ -28,7 +28,7 @@
 ---
 
 > [!IMPORTANT]
-> **NiubiGEO Next Preview is available.** The next version moves from one-time AI visibility audits to long-term AI domain-recognition monitoring. [Read the preview](./NEXT_PREVIEW.md) / [简体中文](./NEXT_PREVIEW.zh-CN.md).
+> **NiubiGEO Next Preview is available.** The next version moves from one-time AI visibility audits to long-term AI domain-recognition monitoring. [Read the preview](../../NEXT_PREVIEW.md) / [简体中文](../../NEXT_PREVIEW.zh-CN.md).
 
 ## You shipped a product. Does AI know it exists?
 
@@ -203,7 +203,7 @@ Reports are saved in the local `runs/` directory by default.
 | DeepSeek | Supported | Uses DeepSeek Responses-compatible API; native `web_search` supported |
 | OpenAI-compatible API | Supported | Custom gateways via `OPENAI_COMPATIBLE_BASE_URL` and `OPENAI_COMPATIBLE_API_KEY` |
 
-See [Provider-native web search](docs/PROVIDER_NATIVE_SEARCH.md) for the exact execution paths and source-labeling rules.
+See [Provider-native web search](../PROVIDER_NATIVE_SEARCH.md) for the exact execution paths and source-labeling rules.
 
 ## Packages
 
@@ -362,9 +362,9 @@ you can explore **NiubiGEO Managed Service, powered by the NiubiStar global user
 <details>
 <summary><strong>View security and license notes</strong></summary>
 
-Do not commit provider keys, customer reports, private prompts, or run data containing sensitive information. Report security issues privately through [SECURITY.md](./SECURITY.md).
+Do not commit provider keys, customer reports, private prompts, or run data containing sensitive information. Report security issues privately through [SECURITY.md](../../SECURITY.md).
 
-NiubiGEO is licensed under [Apache-2.0](./LICENSE).
+NiubiGEO is licensed under [Apache-2.0](../../LICENSE).
 
 </details>
 
@@ -372,7 +372,7 @@ NiubiGEO is licensed under [Apache-2.0](./LICENSE).
 
 Contributions are welcome for new providers, entity recognition rules, source filtering rules, report language improvements, and documentation.
 
-- Read [CONTRIBUTING.md](./CONTRIBUTING.md)
+- Read [CONTRIBUTING.md](../../CONTRIBUTING.md)
 - File bugs in [Issues](https://github.com/Albert-Weasker/niubigeo/issues)
 - Discuss features in [Discussions](https://github.com/Albert-Weasker/niubigeo/discussions)
 

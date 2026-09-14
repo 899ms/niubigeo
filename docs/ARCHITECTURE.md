@@ -172,7 +172,7 @@ JSON 写入通常使用临时文件加 rename，保证单文件替换；不是�
 
 [examples/cli.mjs](../examples/cli.mjs) 的 plan、validate、replay、export 命令读取或复核既有归档；[export.mjs](../examples/lib/export.mjs) 将记录、字段位置和来源分组写成脱敏证据及双语 Markdown。[文档生成器](../scripts/render-release-readme.mjs) 只读已有公共证据、原台账和语义复核，整理四组演示、20 页正文与问题索引，不调用执行器、不更新原始 Run/Attempt。
 
-`examples/cases/R01..R20/README*.md` 是案例正文的唯一交付位置；`public-evidence.json`、`evidence-index.json` 和原图片以相对链接提供证据。`website/` 为保留的历史静态预览源码，不是必需组件，见 [归档说明](../website/README.md)。推理仅在用户另行选择 live 执行时发生。
+`examples/cases/R01..R20/README*.md` 是案例正文的唯一交付位置；`public-evidence.json`、`evidence-index.json` 和原图片以相对链接提供证据，阅读入口见 [案例索引](../examples/README.md)。历史静态预览目录 `website/` 不随当前开源版本分发，运行产品和阅读案例均不需要该目录。推理仅在用户另行选择 live 执行时发生。
 
 ## 实际 HTTP API
 

@@ -59,6 +59,8 @@ Do not include `.env`, customer reports, private prompts, private domains, or se
 
 ## Documentation
 
+Run `npm run docs:check-links` after editing or moving documentation and linked files. This checks relative Markdown and embedded HTML links and images against Git-tracked targets; untracked local files do not satisfy the check. GitHub Actions runs the same check for pushes and pull requests. External URLs and page anchors are outside this check's scope.
+
 When changing report behavior, update:
 
 - `docs/REPORT_STANDARD.md`

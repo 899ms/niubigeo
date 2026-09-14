@@ -1,18 +1,18 @@
 <div align="center">
 
-<img src="./assets/brand/niubigeo-readme-hero.svg" width="100%" alt="NiubiGEO — 开源 AI 品牌可见度与竞争报告工具" />
+<img src="../../assets/brand/niubigeo-readme-hero.svg" width="100%" alt="NiubiGEO — 开源 AI 品牌可见度与竞争报告工具" />
 
 ### AI 会不会推荐你的产品？谁正在抢走你的曝光？
 
 **输入一个域名，看看 AI 是否会推荐你，以及哪些竞争对手更容易出现。**
 
-[Next 预告版](./NEXT_PREVIEW.zh-CN.md) · [English](./README.md) · [快速开始](#3-分钟开始审计) · [Releases](https://github.com/Albert-Weasker/niubigeo/releases) · [Packages](https://github.com/Albert-Weasker/niubigeo/pkgs/container/niubigeo) · [查看对比](#niubigeo-与商业-ai-可见度工具)
+[Next 预告版](../../NEXT_PREVIEW.zh-CN.md) · [English](./README.md) · [快速开始](#3-分钟开始审计) · [Releases](https://github.com/Albert-Weasker/niubigeo/releases) · [Packages](https://github.com/Albert-Weasker/niubigeo/pkgs/container/niubigeo) · [查看对比](#niubigeo-与商业-ai-可见度工具)
 
 <p>
   <strong>NiubiGEO Next 预告版已发布：</strong><br />
-  <a href="./NEXT_PREVIEW.zh-CN.md"><strong>查看新版 AI 域名认知监测方向</strong></a>
+  <a href="../../NEXT_PREVIEW.zh-CN.md"><strong>查看新版 AI 域名认知监测方向</strong></a>
   ·
-  <a href="./NEXT_PREVIEW.md">Read in English</a>
+  <a href="../../NEXT_PREVIEW.md">Read in English</a>
 </p>
 
 <br />
@@ -28,7 +28,7 @@
 ---
 
 > [!IMPORTANT]
-> **NiubiGEO Next 预告版已发布。** 下一版本将从一次性 AI 可见度审计转向长期 AI 域名认知监测。[查看预告版](./NEXT_PREVIEW.zh-CN.md) / [English](./NEXT_PREVIEW.md)。
+> **NiubiGEO Next 预告版已发布。** 下一版本将从一次性 AI 可见度审计转向长期 AI 域名认知监测。[查看预告版](../../NEXT_PREVIEW.zh-CN.md) / [English](../../NEXT_PREVIEW.md)。
 
 ## 你发布了产品，但 AI 知道吗？
 
@@ -203,7 +203,7 @@ npm run audit -- \
 | DeepSeek | 支持 | 使用 DeepSeek Responses 兼容 API；支持原生 `web_search` |
 | OpenAI-compatible API | 支持 | 通过 `OPENAI_COMPATIBLE_BASE_URL` 和 `OPENAI_COMPATIBLE_API_KEY` 接入自定义中转 |
 
-每个 Provider 的具体联网执行路径见 [Provider 原生联网搜索](docs/PROVIDER_NATIVE_SEARCH.zh-CN.md)。
+每个 Provider 的具体联网执行路径见 [Provider 原生联网搜索](../PROVIDER_NATIVE_SEARCH.zh-CN.md)。
 
 ## Packages
 
@@ -362,9 +362,9 @@ Community Edition 适合自行运行 API 可见度审计。如果你还需要：
 <details>
 <summary><strong>查看安全与许可证说明</strong></summary>
 
-不要提交 Provider Key、客户报告、私密 Prompt 或包含敏感信息的运行数据。安全问题请按照 [SECURITY.md](./SECURITY.md) 私下报告。
+不要提交 Provider Key、客户报告、私密 Prompt 或包含敏感信息的运行数据。安全问题请按照 [SECURITY.md](../../SECURITY.md) 私下报告。
 
-NiubiGEO 使用 [Apache-2.0](./LICENSE) 许可证。
+NiubiGEO 使用 [Apache-2.0](../../LICENSE) 许可证。
 
 </details>
 
@@ -372,7 +372,7 @@ NiubiGEO 使用 [Apache-2.0](./LICENSE) 许可证。
 
 欢迎贡献新的 Provider、实体识别规则、来源过滤规则、报告语言和文档。
 
-- 阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)
+- 阅读 [CONTRIBUTING.md](../../CONTRIBUTING.md)
 - 提交 Bug：[Issues](https://github.com/Albert-Weasker/niubigeo/issues)
 - 讨论功能：[Discussions](https://github.com/Albert-Weasker/niubigeo/discussions)
 
