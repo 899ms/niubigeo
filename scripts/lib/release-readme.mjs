@@ -44,6 +44,10 @@ export function releaseReadme(zh, coverage) {
     '  <a href="docs/deployment/docker.md"><img src="assets/readme/self-hosted.svg" alt="Self-hosted" width="132" height="28"></a>',
     '</p>',
     '',
+    '<p align="center">',
+    '  <a href="https://trendshift.io/repositories/212064?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-212064" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/212064/daily?language=TypeScript" alt="Albert-Weasker/niubigeo | Trendshift" width="250" height="55"></a>',
+    '</p>',
+    '',
     `# ${zh ? 'AI 会推荐你的产品吗？谁出现在答案里？' : 'Does AI recommend your product? Who shows up instead?'}`,
     '',
     zh
