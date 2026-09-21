@@ -20,19 +20,19 @@
 
 **输入域名，对照不同模型的产品描述、推荐对象和引用来源。**
 
+> **打破黑盒 GEO，将证据还给用户。**
+
+**[自行部署](#quick-start) · [官方推广平台](https://niubigeo.ai/) · [AI 顾问](https://video.niubistar.com/niubigeo)**
+
 <p align="center">
   <strong><a href="https://niubigeo.ai/">官网</a> · <a href="https://github.com/Albert-Weasker/niubigeo">项目仓库</a> · <a href="README.md">English</a> · <a href="#quick-start">快速开始</a> · <a href="#cases">20 组真实案例</a> · <a href="https://github.com/Albert-Weasker/niubigeo/releases">发布版本</a> · <a href="https://github.com/Albert-Weasker/niubigeo/pkgs/container/niubigeo">容器镜像</a> · <a href="#docs">文档</a></strong>
   <br>
-  <a href="#features">功能一览</a> · <a href="#how-to">使用流程</a> · <a href="#monitoring">持续监测</a> · <a href="#niubigeo-vs-commercial-ai-visibility-tools">工具对比</a> · <a href="#why">为什么做</a> · <a href="#sponsors">赞助商</a>
+  <a href="#features">功能一览</a> · <a href="#how-to">使用流程</a> · <a href="#monitoring">持续监测</a> · <a href="#niubigeo-vs-commercial-ai-visibility-tools">工具对比</a> · <a href="#why">为什么做</a> · <a href="#sponsors">赞助商</a> · <a href="#official-services">官方服务</a> · <a href="docs/PRODUCT-GUIDE.zh-CN.md#faq">公开 FAQ</a>
 </p>
 
 你做了产品、写了文档，也投入了推广。你想知道：当用户向 AI 寻找工具时，你的产品有没有机会出现在答案里？
 
 **NiubiGEO 是一个开源的 AI 品牌可见度与竞争观察工具。** 从一个域名开始，查看不同模型如何描述你、提到哪些竞争对象，再通过关键词测试观察回答里出现了谁。点开结果，就能查看原始回答和返回的来源。
-
-**付费服务：** 真人 AI 测试与 GEO 优化可按需购买。[查看定价](https://niubigeo.ai/pricing)。
-
-> **打破 GEO 报告黑盒，把证据交还给用户。**
 
 ---
 
@@ -57,9 +57,9 @@
 
 ## 开始使用
 
-**想先看看效果？[直接打开 20 组真实案例](examples/README.zh-CN.md)。** 不需要安装，也不需要 API Key。
+**想先看看效果？[打开 20 组公开测试案例](examples/README.zh-CN.md)。** 不需要安装，也不需要 API Key。
 
-想测试自己的产品，准备 Node.js 22+ 和自己的 OpenRouter API Key：
+想测试自己的产品，准备 Node.js 22.13+ 和自己的 OpenRouter API Key：
 
 ```bash
 git clone --branch v0.2.0 --depth 1 https://github.com/Albert-Weasker/niubigeo.git
@@ -88,7 +88,7 @@ npm run server
 4. **打开结果。** 查看品牌描述、竞争对象、关键词和来源。想核对某条结论，就打开原始回答。
 5. **继续观察。** 确认待测关键词后进行关键词测试；重复运行或设置定时监测，积累可以比较的记录。
 
-第一次可以只选一个模型，了解结果后再增加。阅读案例免费；测试自己的项目会消耗所选模型及搜索服务的 API 额度。
+第一次可以只选一个模型，了解结果后再增加。测试自己的项目会消耗所选模型及搜索服务的 API 额度。
 
 ### 与数字人顾问交流
 
@@ -118,7 +118,7 @@ npm run server
 
 第一次域名认知让你看到模型本次怎样描述产品；确认竞争对象与关键词后，可以继续测量同一范围，或创建定时任务。模型选择改变后保留旧记录，新模型不会凭空拥有历史数据。
 
-定时执行需要同时启动 [监测 worker](docs/deployment/docker.md#显式启用-worker)。[PostHog 的三轮真实记录](examples/cases/R04/README.zh-CN.md) 包含定时触发，可逐轮查看回答与失败；几分钟的复测不代表长期增长。
+定时执行需要同时启动 [监测 worker](docs/deployment/docker.md#显式启用-worker)。每轮保留回答、失败与执行条件，便于后续对照；短间隔复测不能替代长期观察。
 
 **[完整工作原理](docs/how-it-works.md)** · [指标与可比条件](docs/measurement-methodology.md) · [已知问题](docs/known-issues.md)
 
@@ -221,6 +221,22 @@ NiubiGEO 想让这件事变得具体：看到不同模型的回答，找到描�
 
 我们希望 NiubiGEO 帮你找到值得行动的问题，并留下之后可以复查的记录。它不会承诺发一篇文章就能被 AI 推荐，也不会把一次回答当成永久排名。
 
+<a id="official-services"></a>
+
+## 需要团队协助？
+
+官方服务可提供 **AI 可见度诊断、真人 AI 测试、GEO 内容优化与内容发布**。付费诊断交付模型 API 原始回答、返回来源、人工核查与改进建议；真人测试则在约定的网页或 App 中实际提问。
+
+你可以独立使用开源版，需要时再委托具体工作。[了解产品功能与官方服务](docs/PRODUCT-GUIDE.zh-CN.md) · [与 AI 顾问交流](https://video.niubistar.com/niubigeo)。
+
+<a id="learning-resources"></a>
+
+## GEO 原理与学习资料
+
+在 NiubiGEO 官网了解 AI 如何检索与引用内容，以及怎样测试和优化品牌表现。
+
+[资源总览](https://niubigeo.ai/resources) · [GEO 原理](https://niubigeo.ai/resources/principles) · [优化方法](https://niubigeo.ai/resources/methods) · [GEO 术语](https://niubigeo.ai/resources/glossary)
+
 <a id="community"></a>
 
 ## 开源、费用与社区
@@ -238,6 +254,8 @@ Community Edition 使用 **[Apache-2.0](LICENSE)** 许可证，免费开源、�
 <p align="center">
   <a href="https://www.niubistar.com/"><strong>NiubiStar</strong></a>
 </p>
+
+NiubiStar 同时为官方服务提供真人执行网络，支持实际使用环境中的测试与内容传播。[了解双方分工](docs/PRODUCT-GUIDE.zh-CN.md)。
 
 <a id="docs"></a>
 

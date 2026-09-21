@@ -20,19 +20,19 @@
 
 **Enter a domain. Compare how models describe your product, who they recommend, and which sources they cite.**
 
+> **Open the GEO reporting black box. Put evidence in your hands.**
+
+**[Self-host](#quick-start) · [Official promotion platform](https://niubigeo.ai/) · [AI advisor](https://video.niubistar.com/niubigeo)**
+
 <p align="center">
   <strong><a href="https://niubigeo.ai/">Website</a> · <a href="https://github.com/Albert-Weasker/niubigeo">GitHub</a> · <a href="README.zh-CN.md">简体中文</a> · UI: English, 简体中文, Português (Brasil) · <a href="#quick-start">Quick start</a> · <a href="#cases">20 real cases</a> · <a href="https://github.com/Albert-Weasker/niubigeo/releases">Releases</a> · <a href="https://github.com/Albert-Weasker/niubigeo/pkgs/container/niubigeo">Packages</a> · <a href="#docs">Docs</a></strong>
   <br>
-  <a href="#features">Features</a> · <a href="#how-to">How to use it</a> · <a href="#monitoring">Monitoring</a> · <a href="#niubigeo-vs-commercial-ai-visibility-tools">Compare tools</a> · <a href="#why">Why NiubiGEO</a> · <a href="#sponsors">Sponsors</a>
+  <a href="#features">Features</a> · <a href="#how-to">How to use it</a> · <a href="#monitoring">Monitoring</a> · <a href="#niubigeo-vs-commercial-ai-visibility-tools">Compare tools</a> · <a href="#why">Why NiubiGEO</a> · <a href="#sponsors">Sponsors</a> · <a href="#official-services">Official services</a> · <a href="docs/PRODUCT-GUIDE.md#faq">FAQ</a>
 </p>
 
 You have built a product, written the docs and worked to get the word out. When people ask AI for tools, does your product make it into the answer?
 
 **NiubiGEO is an open-source tool for tracking brand visibility and competitors in AI answers.** Start with a domain to see how different models describe your product and which competitors they name. Then test keywords to find out who appears in the answers. Open any result to inspect the original response and returned sources.
-
-**Paid services:** We also offer AI testing by real people and GEO optimization. [View pricing](https://niubigeo.ai/en/pricing).
-
-> **Open the GEO reporting black box. Put evidence in your hands.**
 
 ---
 
@@ -59,7 +59,7 @@ You have built a product, written the docs and worked to get the word out. When 
 
 **Want to see it in action first? [Explore 20 real cases](examples/README.md).** No installation or API key needed.
 
-To test your own product, you will need Node.js 22+ and your own OpenRouter API key:
+To test your own product, you will need Node.js 22.13+ and your own OpenRouter API key:
 
 ```bash
 git clone --branch v0.2.0 --depth 1 https://github.com/Albert-Weasker/niubigeo.git
@@ -118,7 +118,7 @@ To hide the card, set `NIUBIGEO_VIDEO_ADVISOR_ENABLED=false` in `.env` and resta
 
 The first domain test shows how models describe your product now. Confirm the competing products and keywords to measure that scope again or create a schedule. Previous records remain when your model selection changes; new models do not acquire invented history.
 
-Scheduled execution requires the [monitoring worker](docs/deployment/docker.md#显式启用-worker) to be running. [PostHog’s three recorded measurements](examples/cases/R04/README.md) include a scheduled run, with answers and failures available for each. A few minutes of repeated tests do not establish long-term growth.
+Scheduled execution requires the [monitoring worker](docs/deployment/docker.md) to be running. [PostHog’s three recorded measurements](examples/cases/R04/README.md) include a scheduled run, with answers and failures available for each. A few minutes of repeated tests do not establish long-term growth.
 
 **[How it works in detail](docs/how-it-works.md)** · [Metrics and comparison conditions](docs/measurement-methodology.md) · [Known issues](docs/known-issues.md)
 
@@ -221,6 +221,22 @@ An inaccurate description can point you back to your website or docs. Different 
 
 We want NiubiGEO to help you find questions worth acting on and keep a record you can revisit. Publishing an article does not guarantee an AI recommendation, and one answer is not a permanent ranking.
 
+<a id="official-services"></a>
+
+## Optional help after diagnosis
+
+Optional official services cover **AI visibility diagnosis, human AI testing, GEO content improvements, and content creation and publishing**. Paid diagnosis provides original API answers, returned sources, human review and action suggestions; human testing captures actual answers from agreed web or app interfaces.
+
+Use the open-source edition independently, and bring in the team when you need help. [Explore product features and official services](docs/PRODUCT-GUIDE.md) · [Talk to the AI advisor](https://video.niubistar.com/niubigeo).
+
+<a id="learning-resources"></a>
+
+## GEO resources
+
+Learn about GEO on the official NiubiGEO website:
+
+[Resources overview](https://niubigeo.ai/resources) · [GEO principles](https://niubigeo.ai/resources/principles) · [Optimization methods](https://niubigeo.ai/resources/methods) · [GEO glossary](https://niubigeo.ai/resources/glossary).
+
 <a id="community"></a>
 
 ## Open source, costs and community
@@ -238,6 +254,8 @@ Thank you to the sponsors supporting NiubiGEO’s open-source development.
 <p align="center">
   <a href="https://www.niubistar.com/"><strong>NiubiStar</strong></a>
 </p>
+
+NiubiStar supports NiubiGEO’s open-source development and provides the global human execution network and related promotion resources for optional official services. [Read about the relationship](docs/PRODUCT-GUIDE.md#niubistar--niubigeo).
 
 <a id="docs"></a>
 

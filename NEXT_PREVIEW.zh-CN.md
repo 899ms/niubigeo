@@ -2,13 +2,13 @@
 
 <img src="./assets/brand/niubigeo-readme-hero.svg" width="100%" alt="NiubiGEO - AI 域名认知监测" />
 
-# NiubiGEO Next
+# NiubiGEO Next · 历史设计稿
 
 ### 输入一个域名，看清哪些 AI 认识你、如何理解你，以及它们还认识谁。
 
-**这是下一版本预告，不是当前稳定版本说明。**
+**本文保留从 v0.1.0-alpha 重构至 v0.2.0 的设计过程。当前产品请阅读 [README](./README.zh-CN.md)。**
 
-![Preview](https://img.shields.io/badge/NEXT-PREVIEW-51FFB7?style=flat-square&labelColor=07110F)
+![历史设计](https://img.shields.io/badge/DESIGN-ARCHIVED-51FFB7?style=flat-square&labelColor=07110F)
 ![Open Source](https://img.shields.io/badge/OPEN_SOURCE-YES-31D7FF?style=flat-square&labelColor=07110F)
 ![Self-hosted](https://img.shields.io/badge/SELF_HOSTED-YES-B5FF3D?style=flat-square&labelColor=07110F)
 ![BYOK](https://img.shields.io/badge/BYOK-OPENROUTER-51FFB7?style=flat-square&labelColor=07110F)
@@ -21,7 +21,19 @@
 ---
 
 > [!IMPORTANT]
-> 本文介绍正在开发的 NiubiGEO 下一版本。界面、数据结构和部分功能尚未正式发布，请勿将本文描述视为当前版本已经具备的能力。
+> **当前公开版本是 v0.2.0。** 本文归档早期“Next”方案及当时的设计取舍。下文的未来时态和未勾选项目保留原稿语境，不代表当前发布状态，也不是新的产品发布预告。现行功能与限制请查看 [v0.2.0 版本说明](./docs/releases/v0.2.0.md)、[当前架构](./docs/ARCHITECTURE.md) 和 [已知问题](./docs/known-issues.md)。
+
+## 开源产品与官方平台
+
+**打破黑盒 GEO，将证据还给用户。** NiubiGEO Community Edition 继续保持 Apache-2.0 开源、可自托管的 GEO 工具定位：使用自己的模型 Key，对比域名认知与关键词回答，查看原始响应和来源。
+
+官方商业平台是独立应用，承接推广计划、人工服务、内容发布、报价、支付和项目交付；它的账户和客户工作台不包含在本仓库的开源安装中。下方归档的“Next”讲的是开源产品重构，不是这套商业平台。两者的关系见 [产品指南](./docs/PRODUCT-GUIDE.zh-CN.md)。
+
+官方平台通过 Growth Canvas 组织目标用户招募、产品试用、社区与创作者传播、网站文章发布和 GEO 复测，并在客户工作台呈现项目进度与交付。[了解官方平台](https://niubigeo.ai/)。自托管项目和报告不会自动上传官方平台，客户报告和账户记录也不属于公开文档。
+
+---
+
+## 原始设计方案
 
 ## 为什么要重构？
 
@@ -250,7 +262,7 @@ Provider 返回的 Citation 与模型正文中普通出现的 URL 会明确区�
 | 静态结果展示为主 | 可比较趋势、绘制动画和即时交互反馈 |
 | 多 Provider 分别配置 | 第一阶段通过 OpenRouter 统一选择多个模型 |
 
-旧版文档、文章和截图记录的是当时可用的 `v0.1.0-alpha`，并不代表作者或社区描述错误。Next Preview 展示的是正在开发的新方向。
+旧版文档、文章和截图记录的是当时可用的 `v0.1.0-alpha`，并不代表作者或社区描述错误。这里保留的是 v0.2.0 发布前确定的设计方向。
 
 ## 数据可信边界
 
@@ -287,7 +299,7 @@ NiubiGEO Next 坚持以下规则：
 
 用户自行承担所选模型产生的 Provider API 费用以及自托管基础设施成本。NiubiGEO 不会把 Mock 数据当成真实 Provider 结果。
 
-## 开发路线
+## 原始开发路线 · 历史快照
 
 - [x] 多项目 Project CRUD 与隔离
 - [x] Draft 项目持久化、归档、删除和恢复
@@ -303,7 +315,7 @@ NiubiGEO Next 坚持以下规则：
 - [ ] 定时监测
 - [ ] 旧版数据迁移与 Legacy 标记
 
-路线图勾选状态表示已经通过对应版本验收，而不是仅存在代码、接口或设计稿。
+勾选状态保留原稿当时的进度，不是当前待办清单。模型选择、域名认知、关键词测量与定时监测已列入 [v0.2.0 版本说明](./docs/releases/v0.2.0.md)。正式发布不表示此前全部验收门禁通过，仍需阅读已知问题；Legacy 迁移应另查 [升级说明](./docs/upgrade.md)。
 
 ## 为什么继续开源？
 
@@ -359,11 +371,12 @@ NiubiGEO 的开源开发由以下赞助方提供支持：
 
 赞助关系不改变 Community Edition 的开源许可证、证据边界或报告结果。项目不会因为赞助关系隐藏不利结果或生成有利结论。
 
-## 当前版本与预告版本
+## 当前版本与本文归档
 
-- 当前公开版本：`v0.1.0-alpha`
-- 本文对应：`NiubiGEO Next Preview`
-- 发布状态：开发中，尚未发布
+- 当前公开版本：[v0.2.0](./docs/releases/v0.2.0.md)
+- 本文对应：已归档的 `NiubiGEO Next Preview` 设计方案
+- 当前使用与安装：[README](./README.zh-CN.md)
+- 官方平台与开源范围：[产品指南](./docs/PRODUCT-GUIDE.zh-CN.md)
 - License：[Apache-2.0](./LICENSE)
 
 ---
@@ -372,7 +385,7 @@ NiubiGEO 的开源开发由以下赞助方提供支持：
 
 ### 一个域名，多个模型，一张可以追溯的 AI 认知地图。
 
-**NiubiGEO Next is under active development.**
+**历史设计保留供查阅。现行文档：[NiubiGEO v0.2.0](./README.zh-CN.md)。**
 
 [查看当前版本](./README.zh-CN.md) · [English](./NEXT_PREVIEW.md) · [关注进展](https://github.com/Albert-Weasker/niubigeo) · [提交建议](https://github.com/Albert-Weasker/niubigeo/issues)
 

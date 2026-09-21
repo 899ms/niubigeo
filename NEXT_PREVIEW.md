@@ -2,13 +2,13 @@
 
 <img src="./assets/brand/niubigeo-readme-hero.svg" width="100%" alt="NiubiGEO - AI domain-recognition monitoring" />
 
-# NiubiGEO Next
+# NiubiGEO Next — Historical design
 
 ### Enter a domain and see which AIs recognize you, how they understand you, and who else they know.
 
-**This is a preview of the next version, not the current stable documentation.**
+**Archived design for the transition from v0.1.0-alpha to v0.2.0. For the current product, read the [README](./README.md).**
 
-![Preview](https://img.shields.io/badge/NEXT-PREVIEW-51FFB7?style=flat-square&labelColor=07110F)
+![Historical design](https://img.shields.io/badge/DESIGN-ARCHIVED-51FFB7?style=flat-square&labelColor=07110F)
 ![Open Source](https://img.shields.io/badge/OPEN_SOURCE-YES-31D7FF?style=flat-square&labelColor=07110F)
 ![Self-hosted](https://img.shields.io/badge/SELF_HOSTED-YES-B5FF3D?style=flat-square&labelColor=07110F)
 ![BYOK](https://img.shields.io/badge/BYOK-OPENROUTER-51FFB7?style=flat-square&labelColor=07110F)
@@ -21,7 +21,19 @@
 ---
 
 > [!IMPORTANT]
-> This document describes the next version of NiubiGEO while it is still in development. The interface, data model, and some capabilities are not released yet, so do not treat this document as a description of the current stable version.
+> **The current public release is v0.2.0.** This file preserves the earlier “Next” proposal and its original design decisions. Future tense and unchecked items below describe the proposal at that time, not today's release status or a new product announcement. Use the [v0.2.0 release notes](./docs/releases/v0.2.0.md), [current architecture](./docs/ARCHITECTURE.md) and [known issues](./docs/known-issues.md) to assess the implementation and its limits.
+
+## The open-source product and the official platform
+
+**Open the GEO reporting black box. Put evidence in your hands.** NiubiGEO Community Edition remains an Apache-2.0, self-hosted GEO tool: bring your own model key, compare domain and keyword answers, and inspect the original responses and sources.
+
+The official commercial platform is a separate application for promotion plans, human services, publishing, quotes, payments and project delivery. Its accounts and customer workbench are not included when you install this repository. The archived “Next” proposal below describes the open-source redesign, not that commercial platform. See the [product guide](./docs/PRODUCT-GUIDE.md) for the distinction.
+
+The official platform uses Growth Canvas to organize target-user recruitment, product trials, community and creator distribution, website publishing and GEO retesting. Customers can follow project progress and delivery in their workbench. [Explore the official platform](https://niubigeo.ai/). Self-hosted projects and reports are not automatically uploaded to it, and customer reports and account records are not part of this public documentation.
+
+---
+
+## Original proposal
 
 ## Why rebuild?
 
@@ -250,7 +262,7 @@ Animation explains state and how data is formed. It does not hide waiting, error
 | Static result display | Comparable trends, drawing animation, and immediate interaction feedback |
 | Providers are configured separately | First phase uses OpenRouter to choose multiple models in one place |
 
-Older documentation, articles, and screenshots describe the available `v0.1.0-alpha` at that time. They are not wrong; Next Preview shows the new direction under development.
+Older documentation, articles, and screenshots describe the available `v0.1.0-alpha` at that time. They are not wrong; this historical proposal records the direction chosen before v0.2.0 was released.
 
 ## Trust boundaries
 
@@ -287,7 +299,7 @@ The capabilities described in this preview are planned for Community Edition:
 
 Users are responsible for provider API costs from the models they choose and for their own self-hosting infrastructure. NiubiGEO will not treat mock data as real provider results.
 
-## Roadmap
+## Original roadmap — historical snapshot
 
 - [x] Multi-project CRUD and isolation
 - [x] Draft project persistence, archive, delete, and restore
@@ -303,7 +315,7 @@ Users are responsible for provider API costs from the models they choose and for
 - [ ] Scheduled monitoring
 - [ ] Legacy data migration and Legacy marking
 
-Roadmap checks mean the item has passed acceptance for the corresponding version, not merely that code, APIs, or designs exist.
+These checkboxes preserve the proposal's status at the time. They are not the current backlog: model selection, domain recognition, keyword measurements and scheduling are described in the [v0.2.0 release notes](./docs/releases/v0.2.0.md). Release does not imply every acceptance check passed; see the documented known issues. Legacy migration still requires checking the [upgrade guide](./docs/upgrade.md).
 
 ## Why keep it open source?
 
@@ -359,11 +371,12 @@ Thanks to everyone in the community who has contributed code, issues, pull reque
 
 Sponsorship does not change the Community Edition license, evidence boundaries, or report results. The project will not hide unfavorable results or generate favorable conclusions because of sponsorship.
 
-## Current version and preview version
+## Current release and this archive
 
-- Current public version: `v0.1.0-alpha`
-- This document: `NiubiGEO Next Preview`
-- Release status: in development, not released yet
+- Current public version: [v0.2.0](./docs/releases/v0.2.0.md)
+- This document: the archived `NiubiGEO Next Preview` proposal
+- Current usage and installation: [README](./README.md)
+- Official platform and open-source scope: [Product guide](./docs/PRODUCT-GUIDE.md)
 - License: [Apache-2.0](./LICENSE)
 
 ---
@@ -372,7 +385,7 @@ Sponsorship does not change the Community Edition license, evidence boundaries, 
 
 ### One domain, multiple models, one traceable AI recognition map.
 
-**NiubiGEO Next is under active development.**
+**Historical design retained for reference. Current documentation: [NiubiGEO v0.2.0](./README.md).**
 
 [View current version](./README.md) · [简体中文](./NEXT_PREVIEW.zh-CN.md) · [Follow progress](https://github.com/Albert-Weasker/niubigeo) · [Suggest changes](https://github.com/Albert-Weasker/niubigeo/issues)
 

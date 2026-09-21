@@ -1,14 +1,22 @@
-# 当前产品架构
+# NiubiGEO 开源产品架构
 
-适用对象：Phase 6 工作树中的 `src/product`；拟发布版本 **v0.2.0-rc.1，UNPUBLISHED（未发布）**。本页是源码说明，不是发布、容器运行或真实模型验收报告。核对基点为 `18c41528a1a7cee8562a6ddc10e59021487962e6`，但当前产品包含未提交修改，不能用该 HEAD 单独重建本页描述的产品。
+适用对象：本仓库 `src/product` 中的 **NiubiGEO Community Edition**。当前公开版本为 **v0.2.0**，发布内容与已知限制见 [正式版本说明](releases/v0.2.0.md)，部署入口见 [Docker 部署](deployment/docker.md)。本页说明开源产品的模块、数据和执行边界，不是官方商业平台的系统架构。
 
-继续复用本仓库的 `docs/ARCHITECTURE.md`，不另建大小写不同的入口。此前的 AuditPlan 架构原样保存在 [Legacy 架构](legacy/ARCHITECTURE-pre-product-v2.md)。旧设计稿、旧 CLI 与当前产品可以同时存在；判断现行能力应从本页链接的服务入口和源码开始。
+此前的 AuditPlan 架构保存在 [Legacy 架构](legacy/ARCHITECTURE-pre-product-v2.md)，重构前的产品预告保存在 [历史设计稿](../NEXT_PREVIEW.zh-CN.md)。其中的 Phase 6、`v0.2.0-rc.1` 与候选验收记录属于发布前的开发阶段，不能用它们将已发布的 v0.2.0 标为“未发布”。旧设计稿、旧 CLI 与当前产品可以同时存在；现行行为以当前源码和正式版本说明为准。
+
+## 开源产品与官方平台
+
+**打破黑盒 GEO，将证据还给用户。** Community Edition 保留开源、可自托管、使用自己的模型 Key 的定位，提供域名认知、关键词测量、模型对比和原始回答与来源回溯。
+
+官方商业平台是独立开发、独立部署的应用，承接推广计划配置、人工服务、内容发布、报价、支付和项目交付。它的账户、订单与客户工作台不属于本仓库的开源安装内容；商业平台也不替代这里的 GEO 测量引擎。两者的关系和服务范围见 [产品指南](PRODUCT-GUIDE.zh-CN.md)。
+
+官方平台通过 Growth Canvas 组合目标用户招募、产品试用、社区与创作者传播、网站文章发布和 GEO 复测，客户可在工作台查看项目进度与交付。本仓库的自托管实例不会自动上传用户项目或报告，开源版本与官方平台分别部署、管理数据。[访问 NiubiGEO 官网](https://niubigeo.ai/)。
 
 ## 系统边界
 
 NiubiGEO 记录 Provider API 的回答及其证据。当前产品执行器只走 OpenRouter；仓库中存在其他 Provider 适配器，不表示新产品界面已开放对应直连入口。
 
-我们公开的是本次回答及其证据，无法据此读出模型内部的思考过程，也不能保证再次运行得到完全相同的答案。
+工作台向实例使用者展示本次回答及其证据，无法据此读出模型内部的思考过程，也不能保证再次运行得到完全相同的答案。保存到自托管实例的数据不等于公开发布；下文的研究案例导出是单独的发布流程。
 
 ```mermaid
 flowchart LR
@@ -28,7 +36,7 @@ flowchart LR
   X -. 只读展示 .-> C[案例 Markdown / 官网]
 ```
 
-实线对应当前产品依赖。虚线表示 Phase 6 公开交付边界，不是产品服务内置的导出 HTTP API；[案例客户端](../examples/lib/client.mjs)、[隔离产品会话](../examples/lib/product-session.ts) 和 [公开导出](../examples/lib/export.mjs) 复用现有服务。案例执行器在隔离 PRODUCT_DATA_DIR 中注入累计预算包装器，网站/Markdown 读取公开导出。新装工作台不会自动导入公开案例。[R02](../examples/cases/R02/README.md) 保存了本轮实际 D/K 回答、三次测量及解析失败。[研究计划](../examples/study-plan.json) 的 20 个案例已执行到终态；运行结束不表示每个回答均有效，覆盖与失败见各例证据索引。
+实线对应当前产品依赖。虚线表示发布前 Phase 6 研究建立的公开导出流程，不是产品服务内置的导出 HTTP API；[案例客户端](../examples/lib/client.mjs)、[隔离产品会话](../examples/lib/product-session.ts) 和 [公开导出](../examples/lib/export.mjs) 复用现有服务。案例执行器在隔离 PRODUCT_DATA_DIR 中注入累计预算包装器，网站/Markdown 读取公开导出。新装工作台不会自动导入公开案例。[R02](../examples/cases/R02/README.md) 保存了该研究的实际 D/K 回答、三次测量及解析失败。[研究计划](../examples/study-plan.json) 的 20 个公开域名案例已执行到终态；运行结束不表示每个回答均有效，覆盖与失败见各例证据索引。这些是版本化研究材料，不是客户委托报告；客户报告、订单与账户记录不属于公开案例目录。
 
 ## 入口与职责
 
