@@ -1,4 +1,5 @@
 import { createServer, type Server } from "node:http";
+import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { renderProductLocalizationScript } from "../src/ui/product-localization.js";
 import { renderProductPhase4AppHtml } from "../src/ui/product-phase4-app.js";
@@ -6,6 +7,11 @@ import { renderProductPhase5AppHtml } from "../src/ui/product-phase5-app.js";
 
 let server: Server;
 let baseUrl = "";
+
+const hasHan = (value: string) => [...value].some((character) => {
+  const point = character.codePointAt(0) || 0;
+  return point >= 0x3400 && point <= 0x9fff;
+});
 
 const focusedFixture = () => `<!doctype html><html><body>
   <main id="app">
@@ -15,6 +21,7 @@ const focusedFixture = () => `<!doctype html><html><body>
     <input id="static-attributes" data-product-i18n-placeholder data-product-i18n-title data-product-i18n-aria-label placeholder="可选" title="项目" aria-label="来源">
     <input id="user-attributes" placeholder="可选" title="项目" aria-label="来源" value="项目">
     <pre id="raw-answer">品牌：项目</pre>
+    <div data-product-i18n-preserve><span id="preserved-label" data-product-i18n>项目</span></div>
     <span class="prototype-key" data-product-i18n>constructor</span>
     <span class="prototype-key" data-product-i18n>toString</span>
     <span class="prototype-key" data-product-i18n>__proto__</span>
@@ -23,11 +30,58 @@ const focusedFixture = () => `<!doctype html><html><body>
   ${renderProductLocalizationScript()}
 </body></html>`;
 
+// The UI embeds browser JavaScript in template strings. Scan its quoted literals
+// without introducing regular expressions, which the repository forbids.
+const quotedLiterals = (source: string): string[] => {
+  const values: string[] = [];
+  for (let index = 0; index < source.length; index += 1) {
+    const quote = source[index];
+    if (quote !== '"' && quote !== "'") continue;
+    let value = "";
+    for (index += 1; index < source.length; index += 1) {
+      const character = source[index];
+      if (character === quote) { values.push(value); break; }
+      if (character === "\n" || character === "\r") break;
+      if (character === "\\" && index + 1 < source.length) {
+        value += character + source[index + 1];
+        index += 1;
+      } else value += character;
+    }
+  }
+  return values;
+};
+
+const productOwnedChineseLiterals = () => [
+  "src/ui/product-phase2-app.ts",
+  "src/ui/product-phase4-app.ts",
+  "src/ui/product-phase5-app.ts",
+  "src/ui/product-project-app.ts",
+].flatMap((path) => quotedLiterals(readFileSync(path, "utf8")))
+  .filter((value) => hasHan(value) && !value.includes("<") && !value.includes(">") && !value.includes('="') && !value.includes("='"));
+
+const coverageFixture = () => `<!doctype html><html><body><main>${[...new Set(productOwnedChineseLiterals())]
+  .map((value) => `<p data-product-i18n>${value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")}</p>`)
+  .join("")}</main>${renderProductLocalizationScript()}</body></html>`;
+
+const recognitionRegressionFixture = () => `<!doctype html><html><body><main>${[
+  "域名认知测试",
+  "模型只接收域名、语言、监测协议和自己的联网方式。未联网与原生联网结果分开记录。",
+  "每个模型独立调用、独立归档；模型描述仅代表本次模型回答。",
+  "当前模型所选请求配置没有可用接口",
+  "本次请求没有找到可用端点。请检查模型联网配置后再决定是否重新请求。",
+  "缺失或格式不正确的字段会明确保留为空，不会推断。",
+  "模型本次识别的品牌",
+  "各竞争对象关键词",
+  "模型的描述只代表本次回答。离线认知与实际联网发现分开显示。",
+  "每一格只表示该模型本次是否返回对应记录，不代表市场事实。",
+  "Provider Citation 与回答正文中的 URL 分开保存和展示。",
+].map((value) => `<p data-product-i18n>${value}</p>`).join("")}</main>${renderProductLocalizationScript()}</body></html>`;
+
 test.beforeAll(async () => {
   server = createServer((request, response) => {
     response.setHeader("Content-Type", "text/html; charset=utf-8");
     const url = new URL(request.url || "/", "http://localhost");
-    response.end(url.pathname === "/translator" ? focusedFixture() : url.searchParams.get("view") === "measurements" ? renderProductPhase5AppHtml() : renderProductPhase4AppHtml());
+    response.end(url.pathname === "/translator" ? focusedFixture() : url.pathname === "/translator-coverage" ? coverageFixture() : url.pathname === "/recognition-regression" ? recognitionRegressionFixture() : url.searchParams.get("view") === "measurements" ? renderProductPhase5AppHtml() : renderProductPhase4AppHtml());
   });
   await new Promise<void>((resolve, reject) => {
     server.once("error", reject);
@@ -36,6 +90,19 @@ test.beforeAll(async () => {
   const address = server.address();
   if (!address || typeof address === "string") throw new Error("Missing test server address.");
   baseUrl = `http://127.0.0.1:${address.port}`;
+});
+
+test("pt-BR: every product-owned dynamic UI literal has a Portuguese translation", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("niubigeo.product.locale", "pt-BR"));
+  await page.goto(`${baseUrl}/translator-coverage`);
+  const untranslated = (await page.locator("p").allTextContents()).filter(hasHan);
+  expect(untranslated).toEqual([]);
+});
+
+test("pt-BR: recognition and report regression phrases contain no Chinese", async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem("niubigeo.product.locale", "pt-BR"));
+  await page.goto(`${baseUrl}/recognition-regression`);
+  expect(hasHan(await page.locator("main").innerText())).toBe(false);
 });
 
 test.afterAll(async () => {
@@ -49,7 +116,7 @@ const locales = [
 ];
 
 for (const language of locales) {
-  test(`${language.locale}: only explicitly marked UI text and attributes are localized`, async ({ page }) => {
+  test(`${language.locale}: only opted-in UI text and attributes translate while arbitrary data stays verbatim`, async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.addInitScript((locale) => localStorage.setItem("niubigeo.product.locale", locale), language.locale);
@@ -68,6 +135,7 @@ for (const language of locales) {
     await expect(page.locator("#user-attributes")).toHaveAttribute("aria-label", "来源");
     await expect(page.locator("#user-attributes")).toHaveValue("项目");
     await expect(page.locator("#raw-answer")).toHaveText("品牌：项目");
+    await expect(page.locator("#preserved-label")).toHaveText("项目");
     await expect(page.locator(".prototype-key")).toHaveText(["constructor", "toString", "__proto__"]);
 
     await page.evaluate(() => {
@@ -160,6 +228,9 @@ for (const language of locales) {
     await expect(card.locator(".detail-cell strong")).toHaveText(["项目", "无法确认", language.unknown]);
     await expect(card.locator(".evidence-group li strong")).toHaveText("项目");
     await expect(card.locator(".evidence-group .tag")).toHaveText("来源");
+    await expect(page.getByTestId("report-competitor-matrix").locator("tbody th")).toHaveText("项目");
+    await expect(page.getByTestId("report-keyword-matrix").locator("tbody th")).toHaveText("来源");
+    expect((await page.getByTestId("report-competitor-select").locator("option").textContent())?.split(" · ")[0]).toBe("项目");
     await expect(page.locator('a[href="https://source.example/"]')).toHaveText("项目");
     await expect(page.locator('a[href="https://source.example/answer"]')).toHaveText("来源");
     await expect(page.locator(".heading .inline-actions > .subtle")).toHaveText(language.version);
@@ -182,6 +253,7 @@ for (const language of locales) {
   test(`${language.locale}: measurement mode labels translate while model names stay verbatim`, async ({ page }) => {
     const errors: string[] = [];
     const unexpectedRequests: string[] = [];
+    const rawAnswer = "品牌：Acme\n项目与模型是原始证据。\n来源\n无法确认";
     const project = { id: "measurement-project", name: "项目", normalizedDomain: "fixture.example", activeBaselineId: "baseline-fixture" };
     const selections = [
       { modelId: "fixture/off", displayName: "不联网", webSearchMode: "off" },
@@ -207,7 +279,11 @@ for (const language of locales) {
       else if (path.endsWith("/watch-sets")) body = { watchSets: [watchSet] };
       else if (path.endsWith("/measurement-runs")) body = { runs: [run] };
       else if (path.endsWith("/monitoring-tasks")) body = { tasks: [] };
-      else if (path.endsWith("/measurement-stats")) body = { snapshot: { points } };
+      else if (path.endsWith("/measurement-stats")) body = { snapshot: { id: "snapshot-fixture", points } };
+      else if (path.endsWith("/samples")) body = {
+        point: points.find((point) => path.includes("/points/" + point.id + "/")),
+        samples: [{ sample: { attemptId: "attempt-fixture", probeRunId: "probe-fixture", included: true, numerator: 1 }, detail: { attempts: [{ id: "attempt-fixture", rawAnswer }] } }],
+      };
       else { unexpectedRequests.push(path); body = {}; }
       await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(body) });
     });
@@ -216,10 +292,41 @@ for (const language of locales) {
     await expect(page.locator("#p5-recognition tbody tr td:first-child")).toHaveText(["不联网", "Provider 原生联网"]);
     await expect(page.locator("#p5-recognition tbody tr td:nth-child(2)")).toHaveText([language.offline, language.native]);
 
+    if (language.locale === "pt-BR") {
+      await page.getByRole("button", { name: "Domínio no corpo da resposta", exact: true }).click();
+      await expect(page.getByRole("heading", { name: "Menções ao domínio sem citar previamente a marca", exact: true })).toBeVisible();
+      await expect(page.getByText("Evidência: Se o domínio do objeto realmente aparece no corpo da resposta à palavra-chave neutra", { exact: true })).toBeVisible();
+      await expect(page.getByText("Cálculo: Domínio mencionado no corpo / respostas de palavra-chave avaliáveis", { exact: true })).toBeVisible();
+    }
+
     const chart = page.locator(".p5-chart").first();
     await chart.locator("summary").click();
     await expect(chart.locator("tbody tr td:nth-child(2)")).toHaveText(["不联网", "Provider 原生联网"]);
     await expect(chart.locator("tbody tr td:nth-child(3)")).toHaveText([language.offline, language.native]);
+    await expect(page.locator('[data-role="projects"] option')).toHaveText("项目 · fixture.example");
+    await chart.locator("[data-point]").click();
+    const drawer = page.getByTestId("measurement-evidence-drawer");
+    await expect(drawer).toBeVisible();
+    await expect(drawer.locator("pre")).toHaveCount(points.length);
+    expect(await drawer.locator("pre").allTextContents()).toEqual(points.map(() => rawAnswer));
+    await expect(drawer).toContainText("不联网");
+    await expect(drawer).toContainText("Provider 原生联网");
+    if (language.locale === "pt-BR") {
+      // Keep the collision-data assertions above, then use a separate Latin-data
+      // scene to detect any untranslated UI text, including missing opt-in marks.
+      project.name = "KOSMOS";
+      watchSet.objects[0]!.name = "KOSMOS";
+      selections.forEach((model, index) => { model.displayName = "Fixture Model " + index; });
+      points.forEach((point, index) => { point.modelDisplayName = "Fixture Model " + index; });
+      await page.reload();
+      await expect(page.getByTestId("phase5-ready")).toBeVisible();
+      await page.locator(".p5-chart").first().locator("summary").click();
+      const interfaceText = await page.locator("body").evaluate((body) => [
+        body.innerText,
+        ...[...body.querySelectorAll("*")].flatMap((element) => ["aria-label", "placeholder", "title"].map((attribute) => element.getAttribute(attribute) || "")),
+      ].join("\n"));
+      expect(hasHan(interfaceText), interfaceText).toBe(false);
+    }
     expect(unexpectedRequests).toEqual([]);
     expect(errors).toEqual([]);
   });
